@@ -1,1 +1,49 @@
-<ipaddresstracker-nx-welcome></ipaddresstracker-nx-welcome>
+<main class="tracker">
+  <section class="tracker__form">
+    <h1 class="tracker__form--heading">IP adress Tracker</h1>
+    <div class="tracker__form--action">
+      <input
+        type="text"
+        class="tracker__form--input"
+        placeholder="Search for any IP adress or domain"
+        [(ngModel)]="inputValue"
+        (keydown.enter)="getLocation()"
+      />
+      <button class="tracker__form--btn" type="button" (click)="getLocation()">
+        <span class="tracker__form--arrow"></span>
+      </button>
+      <p class="tracker__form--error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
+    </div>
+    <div class="tracker__results" *ngIf="locationData">
+      <ul class="tracker__results--list">
+        <li class="tracker__results--card">
+          <p class="tracker__results--type">IP ADDRESS</p>
+          <p class="tracker__results--data">{{ locationData.ip }}</p>
+        </li>
+        <div class="separator"></div>
+        <li class="tracker__results--card">
+          <p class="tracker__results--type">LOCATION</p>
+          <p class="tracker__results--data">
+            {{ locationData.location.city }},
+            {{ locationData.location.region }}
+          </p>
+        </li>
+        <div class="separator"></div>
+        <li class="tracker__results--card">
+          <p class="tracker__results--type">TIMEZONE</p>
+          <p class="tracker__results--data">
+            {{ locationData.location.timezone }}
+          </p>
+        </li>
+        <div class="separator"></div>
+        <li class="tracker__results--card">
+          <p class="tracker__results--type">ISP</p>
+          <p class="tracker__results--data">{{ locationData.isp }}</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <section id="map" class="tracker__map"></section>
+</main>
