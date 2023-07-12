@@ -32,7 +32,7 @@ export class MapService {
    * @param options Las opciones para configurar la capa de teselas.
    */
   addTileLayer(
-    url = 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
+    url = 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=3c2a705a-d49e-4dca-949b-aca34be63d2f',
     options: L.TileLayerOptions = {
       attribution:
         '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
