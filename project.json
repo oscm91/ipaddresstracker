@@ -15,6 +15,7 @@
         "outputPath": "dist/ipaddresstracker",
         "index": "./src/index.html",
         "main": "./src/main.ts",
+        "baseHref": "ipaddresstracker",
         "polyfills": [
           "zone.js"
         ],
