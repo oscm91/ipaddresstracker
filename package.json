@@ -6,7 +6,8 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "e2e": "nx e2e e2e"
+    "e2e": "nx e2e e2e",
+    "deploy": "nx build && gh-pages -d dist/ipaddresstracker"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~16.1.0",
     "@angular/router": "~16.1.0",
     "@nx/angular": "16.5.1",
+    "gh-pages": "^5.0.0",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "rxjs": "~7.8.0",
@@ -44,8 +46,8 @@
     "@nx/workspace": "16.5.1",
     "@schematics/angular": "~16.1.0",
     "@types/jest": "^29.4.0",
-    "@types/node": "16.11.7",
     "@types/leaflet": "^1.9.3",
+    "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "cypress": "^12.16.0",
