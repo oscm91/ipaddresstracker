@@ -18,6 +18,7 @@ export class IpService {
    */
   getClientIpAddress(): Observable<string> {
     return this.http.get('https://api.ipify.org?format=json').pipe(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       map((response: any) => {
         return response.ip;
       })

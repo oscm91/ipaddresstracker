@@ -45,34 +45,40 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Método para obtener la dirección IP del cliente
   private getClientIpAddress(): void {
-    this.ipService.getClientIpAddress().pipe(takeUntil(this.unsubscribe$)).subscribe((clientIp: string) => {
-      this.clientIpAddress = clientIp;
-      if (this.clientIpAddress) {
-        // Si se obtuvo una dirección IP, buscar los datos de la ubicación
-        this.getIpAddressData(this.clientIpAddress);
-      }
-    });
+    this.ipService
+      .getClientIpAddress()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((clientIp: string) => {
+        this.clientIpAddress = clientIp;
+        if (this.clientIpAddress) {
+          // Si se obtuvo una dirección IP, buscar los datos de la ubicación
+          this.getIpAddressData(this.clientIpAddress);
+        }
+      });
   }
 
   // Método para obtener los datos de la ubicación a partir de una dirección IP
   private getIpAddressData(ipAddress: string): void {
-    this.ipService.getIpAddressData(ipAddress).pipe(takeUntil(this.unsubscribe$)).subscribe(
-      (response: IpLocation) => {
-        this.locationData = response;
-        if (this.locationData.location) {
-          // Si se obtuvieron datos de la ubicación, actualizar la vista del mapa
-          this.setMapView(
-            this.locationData.location.lat,
-            this.locationData.location.lng
-          );
+    this.ipService
+      .getIpAddressData(ipAddress)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        (response: IpLocation) => {
+          this.locationData = response;
+          if (this.locationData.location) {
+            // Si se obtuvieron datos de la ubicación, actualizar la vista del mapa
+            this.setMapView(
+              this.locationData.location.lat,
+              this.locationData.location.lng
+            );
+          }
+        },
+        () => {
+          // En caso de error, mostrar un mensaje
+          this.errorMessage =
+            'Error occurred while fetching location data. Try again later';
         }
-      },
-      () => {
-        // En caso de error, mostrar un mensaje
-        this.errorMessage =
-          'Error occurred while fetching location data. Try again later';
-      }
-    );
+      );
   }
 
   // Método para actualizar la vista del mapa

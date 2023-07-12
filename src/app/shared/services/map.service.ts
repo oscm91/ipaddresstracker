@@ -14,6 +14,7 @@ export class MapService {
     popupAnchor: [0, 0],
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
   /**

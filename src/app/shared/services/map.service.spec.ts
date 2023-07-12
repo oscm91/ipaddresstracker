@@ -13,6 +13,7 @@ jest.mock('leaflet', () => ({
 
 describe('MapService', () => {
   let service: MapService;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let L: any;
 
   beforeEach(() => {

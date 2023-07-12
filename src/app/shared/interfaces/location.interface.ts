@@ -1,6 +1,7 @@
 export interface IpLocation {
   ip: string; // La dirección IP
-  location: { // La ubicación geográfica asociada a la IP
+  location: {
+    // La ubicación geográfica asociada a la IP
     country: string; // El país
     region: string; // La región
     city: string; // La ciudad
@@ -11,7 +12,8 @@ export interface IpLocation {
     geonameId: number; // El identificador de Geoname
   };
   domains: string[]; // Los dominios asociados a la IP
-  as: { // La información del Sistema Autónomo (AS)
+  as: {
+    // La información del Sistema Autónomo (AS)
     asn: number; // El número del Sistema Autónomo (AS)
     name: string; // El nombre del Sistema Autónomo (AS)
     route: string; // La ruta del Sistema Autónomo (AS)

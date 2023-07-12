@@ -20,7 +20,7 @@ describe('AppComponent', () => {
       lng: 0,
       timezone: 'UTC',
       postalCode: '00500',
-      geonameId: 1
+      geonameId: 1,
     },
     isp: 'Test ISP',
     domains: [],
@@ -29,20 +29,33 @@ describe('AppComponent', () => {
       name: '',
       route: '',
       domain: '',
-      type: ''
-    }
+      type: '',
+    },
   };
 
   beforeEach(async () => {
     // Configuración inicial para las pruebas
     await TestBed.configureTestingModule({
-      declarations: [ AppComponent ],
+      declarations: [AppComponent],
       providers: [
-        { provide: IpService, useValue: { getClientIpAddress: jest.fn(), getIpAddressData: jest.fn() } },
-        { provide: MapService, useValue: { createMap: jest.fn(), addTileLayer: jest.fn(), setView: jest.fn(), addMarker: jest.fn() } },
+        {
+          provide: IpService,
+          useValue: {
+            getClientIpAddress: jest.fn(),
+            getIpAddressData: jest.fn(),
+          },
+        },
+        {
+          provide: MapService,
+          useValue: {
+            createMap: jest.fn(),
+            addTileLayer: jest.fn(),
+            setView: jest.fn(),
+            addMarker: jest.fn(),
+          },
+        },
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
@@ -56,8 +69,12 @@ describe('AppComponent', () => {
 
   it('should get client IP address on init', () => {
     // Verifica si se obtiene la dirección IP del cliente al iniciar
-    const getClientIpAddressSpy = jest.spyOn(ipService, 'getClientIpAddress').mockReturnValue(of('192.0.2.0'));
-    const getIpAddressDataSpy = jest.spyOn(ipService, 'getIpAddressData').mockReturnValue(of(mockIpLocation));
+    const getClientIpAddressSpy = jest
+      .spyOn(ipService, 'getClientIpAddress')
+      .mockReturnValue(of('192.0.2.0'));
+    const getIpAddressDataSpy = jest
+      .spyOn(ipService, 'getIpAddressData')
+      .mockReturnValue(of(mockIpLocation));
 
     component.ngOnInit();
 
@@ -67,18 +84,26 @@ describe('AppComponent', () => {
 
   it('should handle error when getting IP address data', () => {
     // Verifica si se maneja correctamente el error al obtener los datos de la dirección IP
-    jest.spyOn(ipService, 'getClientIpAddress').mockReturnValue(of('192.0.2.0'));
-    const getIpAddressDataSpy = jest.spyOn(ipService, 'getIpAddressData').mockReturnValue(throwError('Error'));
+    jest
+      .spyOn(ipService, 'getClientIpAddress')
+      .mockReturnValue(of('192.0.2.0'));
+    const getIpAddressDataSpy = jest
+      .spyOn(ipService, 'getIpAddressData')
+      .mockReturnValue(throwError('Error'));
 
     component.ngOnInit();
 
     expect(getIpAddressDataSpy).toHaveBeenCalledWith('192.0.2.0');
-    expect(component.errorMessage).toBe('Error occurred while fetching location data. Try again later');
+    expect(component.errorMessage).toBe(
+      'Error occurred while fetching location data. Try again later'
+    );
   });
 
   it('should get location data for valid IP address input', () => {
     // Verifica si se obtienen los datos de ubicación para una entrada de dirección IP válida
-    const getIpAddressDataSpy = jest.spyOn(ipService, 'getIpAddressData').mockReturnValue(of(mockIpLocation));
+    const getIpAddressDataSpy = jest
+      .spyOn(ipService, 'getIpAddressData')
+      .mockReturnValue(of(mockIpLocation));
     component.inputValue = '192.0.2.0';
 
     component.getLocation();
